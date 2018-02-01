@@ -22,4 +22,7 @@ public interface UserService {
     public ServerResponse<User> updateInformation(User user);
 
     public ServerResponse<User> getInformation(Integer userId);
+
+    //backend
+    public ServerResponse<String> checkAdminRole(User user);
 }
