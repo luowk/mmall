@@ -19,7 +19,6 @@ import java.util.Set;
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
