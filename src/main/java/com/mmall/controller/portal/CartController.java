@@ -8,6 +8,7 @@ import com.mmall.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,8 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @RequestMapping("/add.do")
+    @ResponseBody
     public ServerResponse add(HttpSession session, Integer count, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
