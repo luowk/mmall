@@ -17,6 +17,14 @@ public class Const {
         Integer ROLE_ADMIN = 1; //管理员
     }
 
+    public interface Cart {
+        Integer CHECKED = 1; //已勾选
+        Integer UNCHECKED = 0; //未勾选
+
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
+    }
+
     public static final String EMAIL = "email";
     public static final String USERNAME = "username";
 

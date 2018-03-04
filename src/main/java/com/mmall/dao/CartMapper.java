@@ -18,5 +18,10 @@ public interface CartMapper {
 
     int updateByPrimaryKey(Cart record);
 
+    Cart selectByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
+
+    List<Cart> selectByUserId(@Param("userId") Integer userId);
+
+    Integer selectCartProductCheckedStatusByUserId(@Param("userId") Integer userId);
 
 }
