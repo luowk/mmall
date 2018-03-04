@@ -12,7 +12,7 @@ public interface CartService {
 
     public ServerResponse<CartVo> list(Integer userId);
 
-    public ServerResponse<CartVo> selectOrUnSelectAll(Integer userId, Integer productId, Integer checked);
+    public ServerResponse<CartVo> selectOrUnSelect(Integer userId, Integer productId, Integer checked);
 
     public ServerResponse<Integer> getCartProductCount(Integer userId);
 }

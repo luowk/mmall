@@ -151,7 +151,7 @@
     update mmall_cart
     set checked = #{checked},
     update_time = now()
-    where userId = #{userId}
+    where user_id = #{userId}
     <if test="productId != null">
       and product_id = #{productId}
     </if>

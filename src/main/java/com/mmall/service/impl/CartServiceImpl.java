@@ -143,12 +143,12 @@ public class CartServiceImpl implements CartService {
         if (CollectionUtils.isEmpty(productIdList)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
-        cartMapper.deleteByUserIdProductIds(userId, productIds);
+        cartMapper.deleteByUserIdProductIds(userId, productIdList);
         return list(userId);
     }
 
     @Override
-    public ServerResponse<CartVo> selectOrUnSelectAll(Integer userId, Integer productId, Integer checked) {
+    public ServerResponse<CartVo> selectOrUnSelect(Integer userId, Integer productId, Integer checked) {
         cartMapper.checkedOrUncheckedProduct(userId, productId, checked);
         return list(userId);
     }

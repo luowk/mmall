@@ -56,7 +56,7 @@ public class CartController {
 
     @RequestMapping(value = "/deleteProduct.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<CartVo> deleteProduct(HttpSession session, Integer count, String productIds) {
+    public ServerResponse<CartVo> deleteProduct(HttpSession session, String productIds) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
@@ -72,7 +72,7 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return cartService.selectOrUnSelectAll(user.getId(), null, Const.Cart.CHECKED);
+        return cartService.selectOrUnSelect(user.getId(), null, Const.Cart.CHECKED);
     }
 
     @RequestMapping(value = "/unSelectAll.do", method = RequestMethod.POST)
@@ -82,7 +82,7 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return cartService.selectOrUnSelectAll(user.getId(), null, Const.Cart.UNCHECKED);
+        return cartService.selectOrUnSelect(user.getId(), null, Const.Cart.UNCHECKED);
     }
 
     @RequestMapping(value = "/select.do", method = RequestMethod.POST)
@@ -92,7 +92,7 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return cartService.selectOrUnSelectAll(user.getId(), productId, Const.Cart.CHECKED);
+        return cartService.selectOrUnSelect(user.getId(), productId, Const.Cart.CHECKED);
     }
 
     @RequestMapping(value = "/unSelect.do", method = RequestMethod.POST)
@@ -102,10 +102,10 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return cartService.selectOrUnSelectAll(user.getId(), productId, Const.Cart.UNCHECKED);
+        return cartService.selectOrUnSelect(user.getId(), productId, Const.Cart.UNCHECKED);
     }
 
-    @RequestMapping(value = "/getCartProductCount.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/getCartProductCount.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<Integer> getCartProductCount(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
