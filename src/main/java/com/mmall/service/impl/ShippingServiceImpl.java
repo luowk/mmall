@@ -38,7 +38,7 @@ public class ShippingServiceImpl implements ShippingService {
         if (rowCount > 0) {
             return ServerResponse.createBySuccess("删除地址成功");
         }
-        ServerResponse.createBySuccess("删除地址失败");
+        return ServerResponse.createBySuccess("删除地址失败");
     }
 
     @Override
