@@ -1,14 +1,12 @@
 package com.mmall.controller.portal;
 
 import com.alipay.api.AlipayApiException;
-import com.alipay.api.domain.AlipayEcoCplifeUseridentityStatusUpdateModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
 import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
-import com.mmall.dao.OrderMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.OrderService;
 import org.slf4j.Logger;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -129,7 +128,13 @@ public class OrderController {
             logger.error("支付宝验证回调异常", e);
         }
 
-        //todo 验证各种数据
+        //验证各种数据
+        String orderNo = (String) params.get("out_trade_no");
+        BigDecimal totalAmount = (BigDecimal) params.get("total_amount");
+        String sellerId = (String) params.get("seller_id");
+        if (!orderService.checkAlipayCallbackData(orderNo, totalAmount, sellerId)) {
+            return false;
+        }
 
 
         //todo 业务逻辑

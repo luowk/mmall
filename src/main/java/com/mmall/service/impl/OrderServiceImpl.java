@@ -494,6 +494,15 @@ public class OrderServiceImpl implements OrderService {
         return orderVoList;
     }
 
+    @Override
+    public Boolean checkAlipayCallbackData(String orderNo, BigDecimal totalAmount, String sellerId) {
+        Order order = orderMapper.selectByOrderNo(Long.getLong(orderNo));
+        if (order == null || order.getPayment().compareTo(totalAmount) != 0 || !Configs.getPid().equals(sellerId)) {
+            return false;
+        }
+        return true;
+    }
+
     //backend
     @Override
     public ServerResponse manageList(Integer pageNum, Integer pageSize) {
@@ -532,6 +541,7 @@ public class OrderServiceImpl implements OrderService {
         return ServerResponse.createByErrorMessage("订单不存在");
     }
 
+    @Override
     public ServerResponse manageSendGoods(Long orderNo) {
         Order order = orderMapper.selectByOrderNo(orderNo);
         if (order != null) {
