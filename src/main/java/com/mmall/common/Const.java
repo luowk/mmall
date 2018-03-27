@@ -8,6 +8,12 @@ public class Const {
 
     public static final String CURRENT_USER = "currentUser";
 
+    public static final String TOKEN_PREFIX = "token_";
+
+    public interface RedisCacheExtime {
+        Integer REDIS_SESSION_EXTIME = 60 * 30;
+    }
+
     public interface ProductListOrderBy {
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc", "price_asc");
     }
