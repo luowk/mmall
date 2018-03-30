@@ -32,4 +32,6 @@ public interface OrderService {
     public ServerResponse manageSearch(Long orderNo, Integer pageNum, Integer pageSize);
 
     public ServerResponse manageSendGoods(Long orderNo);
+
+    public void closeOrder(Integer hour);
 }
