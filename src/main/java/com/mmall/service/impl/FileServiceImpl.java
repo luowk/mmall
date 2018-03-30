@@ -34,11 +34,15 @@ public class FileServiceImpl implements FileService {
         try {
             file.transferTo(targetFile);//文件已经上传成功
 
-            FTPUtil.uploadFile(Lists.newArrayList(targetFile));//将targetFile上传到FTP服务器
-
+            Boolean isSuccess = FTPUtil.uploadFile(Lists.newArrayList(targetFile));//将targetFile上传到FTP服务器
             targetFile.delete();//上传完成后，删除upload下面的文件
+            if (!isSuccess) {
+                return null;
+            }
+
+
         } catch (IOException e) {
-            log.error("上传文件异常");
+            log.error("上传文件异常", e);
             return null;
         }
         return targetFile.getName();

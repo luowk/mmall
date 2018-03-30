@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CookieUtil {
 
-    private final static String COOKIE_DOMAIN = ".mmall.com";
+    private final static String COOKIE_DOMAIN = "mmall.com";
 
     private final static String COOKIE_NAME = "mmall_login_token";
 
     public static String readLoginToken(HttpServletRequest request) {
         Cookie[] cks = request.getCookies();
+        if (cks == null || cks.length == 0) {
+            return null;
+        }
         for (Cookie ck : cks) {
             if (StringUtils.equals(ck.getName(), COOKIE_NAME)) {
                 log.info("return cookieName:{}, cookieValue:{}", ck.getName(), ck.getValue());
@@ -40,6 +43,9 @@ public class CookieUtil {
 
     public static void delLoginToken(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cks = request.getCookies();
+        if (cks == null || cks.length == 0) {
+            return;
+        }
         for (Cookie ck : cks) {
             if (StringUtils.equals(ck.getName(), COOKIE_NAME)) {
                 ck.setDomain(COOKIE_DOMAIN);
